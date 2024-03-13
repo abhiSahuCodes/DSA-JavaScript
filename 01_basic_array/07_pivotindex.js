@@ -29,3 +29,31 @@ function findingPivotIndex(array) {
 }
 
 console.log(findingPivotIndex(numArray));
+
+// All zeros to the end
+/*
+Input: [0, 1, 0, 3, 12]
+Output: [1, 3, 12, 0, 0]
+*/
+
+function moveZerosToTheEnd(array) {
+    let nonZeroIndex = 0;
+
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] !== 0) {
+            [array[i], array[nonZeroIndex]] = [array[nonZeroIndex], array[i]];
+            nonZeroIndex++;
+        }
+    }
+
+    for (let i = nonZeroIndex; i < array.length; i++) {
+        array[i] = 0;
+    }
+
+    return array;
+}
+
+
+const Array = [0, 1, 0, 3, 12];
+console.log(moveZerosToTheEnd(Array)); // Output: [1, 3, 12, 0, 0]
+
