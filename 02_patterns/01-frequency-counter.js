@@ -97,4 +97,36 @@ function anagramAnalyzer(str1, str2) {
 const string1 = 'texttwisttime';
 const string2 = 'timetwisttext';
 
-console.log(anagramAnalyzer(string1, string2));
+// console.log(anagramAnalyzer(string1, string2));
+
+// Another method
+
+function isValidAnagram(first, second) {
+    if (first.length !== second.length) {
+        return false;
+    }
+
+    let counter = {};
+
+    for (let i = 0; i < first.length; i++) {
+        let character = first[i];
+
+        counter[character] ? counter[character] += 1 : counter[character] = 1;
+    }
+
+    for (let i = 0; i < second.length; i++) {
+        let character = second[i];
+
+        if (!counter[character]) {
+            return false;
+        } else {
+            counter[character] -= 1;
+        }
+    }
+    return true;
+}
+
+const firstString = 'anagram';
+const secondString = 'nagaram';
+
+console.log(isValidAnagram(firstString, secondString));
