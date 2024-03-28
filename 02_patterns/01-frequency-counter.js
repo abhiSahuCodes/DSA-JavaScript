@@ -129,4 +129,5 @@ function isValidAnagram(first, second) {
 const firstString = 'anagram';
 const secondString = 'nagaram';
 
-console.log(isValidAnagram(firstString, secondString));
+// console.log(isValidAnagram(firstString, secondString));
+
