@@ -48,4 +48,15 @@ function countingUniqueValues(arr) {
 let arrVal = [1, 2, 3, 4, 4, 4, 7, 7, 12, 12, 13];
 console.log(countingUniqueValues(arrVal));
 
+// new variable method
+function uniqueValuesCounter(array) {
+  let unique = [];
+  for (let i = 0; i < array.length; i++) {
+    if (!unique.includes(array[i])) {
+      unique.push(array[i]);
+    }
+  }
+  return unique.length;
+}
 
+console.log(uniqueValuesCounter(arrVal));
