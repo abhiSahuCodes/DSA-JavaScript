@@ -13,3 +13,23 @@ function sumZero(array) {
 
 const nums = [-4, -3, -2, -1, 0, 1, 2, 5];
 console.log(sumZero(nums));
+
+// linear time complexity
+
+function sumZeroRefactored(array) {
+    let left = 0;
+    let right = array.length - 1;
+    while (left < right) {
+        let sum = array[left] + array[right];
+        if (sum == 0) {
+            return [array[left], array[right]];
+        } else if (sum > 0) {
+            right--;
+        } else {
+            left++;
+        }
+    }
+} 
+
+const array = [-4, -3, -2, -1, 0, 1, 2, 5];
+console.log(sumZeroRefactored(array));
