@@ -61,3 +61,5 @@ function uniqueValuesCounter(array) {
 }
 
 console.log(uniqueValuesCounter(arrVal));
+
+
