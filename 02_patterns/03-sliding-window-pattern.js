@@ -21,7 +21,7 @@ function maxSubarraySum(arr, num) {
 const array = [2, 6, 9, 2, 1, 8, 5, 6, 3];
 const num = 3;
 
-// console.log(maxSubarraySum(array, num));
+console.log(maxSubarraySum(array, num));
 
 // optimal solution sliding window method
 
@@ -64,6 +64,6 @@ let nums = [1, -1, -3, -2, 3];
 let k = 3;
 let x = 2;
 
-console.log(beautySubarray(nums, k, x));
+// console.log(beautySubarray(nums, k, x));
 
 
