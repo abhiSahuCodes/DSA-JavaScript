@@ -64,6 +64,21 @@ function areThereDuplicates(arr) {
     return false;
 }
 
-const array = [1, 2, 3, 4, 4, 5]
+const array = [1, 2, 3, 3, 4, 5]
 
 console.log(areThereDuplicates(array));
+
+// Time complexity = O(n log n) and Space complexity = O(1)
+
+function areThereDuplicatesHere(arr) {
+    arr.sort((a, b) => a - b);
+
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === arr[i + 1]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+console.log(areThereDuplicatesHere(array));
