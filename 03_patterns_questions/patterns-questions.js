@@ -38,6 +38,32 @@ const n4 = 457;
 const n5 = 333;
 const n6 = 3333;
 
-console.log(sameFrequency(n1, n2));
-console.log(sameFrequency(n3, n4));
-console.log(sameFrequency(n5, n6));
+// console.log(sameFrequency(n1, n2));
+// console.log(sameFrequency(n3, n4));
+// console.log(sameFrequency(n5, n6));
+
+// Frequency Counter / Multiple Pointers - areThereDuplicates
+
+// Time complexity = O(n) and space complexity = O(n)
+function areThereDuplicates(arr) {
+    let obj = {};
+
+    arr.forEach((val) => {
+        if (!(obj[val])) {
+            obj[val] = 1;
+        } else {
+            obj[val] += 1;
+        }
+    })
+
+    for (let val in obj) {
+        if (obj[val] > 1) {
+            return true;
+        }
+    }
+    return false;
+}
+
+const array = [1, 2, 3, 4, 4, 5]
+
+console.log(areThereDuplicates(array));
