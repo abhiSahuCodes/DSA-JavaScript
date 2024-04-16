@@ -107,3 +107,12 @@ function areThereDuplicatesInArgs(...args) {
 
 console.log(areThereDuplicatesInArgs(3, 4, 5, 5, 6));
 console.log(areThereDuplicatesInArgs('a', 'b', 'c', 'a'));
+
+
+// One line solution
+
+function areThereDuplicatesOneLine(...args) {
+  return new Set(args).size !== args.length;
+}
+
+console.log(areThereDuplicatesOneLine(32, 25, 15, 65, 76, 65));
