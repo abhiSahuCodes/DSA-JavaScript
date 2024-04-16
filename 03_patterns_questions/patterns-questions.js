@@ -73,7 +73,7 @@ console.log(areThereDuplicates(array));
 function areThereDuplicatesHere(arr) {
     arr.sort((a, b) => a - b);
 
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < arr.length - 1; i++) {
         if (arr[i] === arr[i + 1]) {
             return true;
         }
@@ -82,3 +82,28 @@ function areThereDuplicatesHere(arr) {
 }
 
 console.log(areThereDuplicatesHere(array));
+
+// Multiple pointers method with many arguments
+
+function areThereDuplicatesInArgs(...args) {
+  args.sort((a,b) => {
+    if (a < b) return -1;
+    if (a > b) return 1;
+    return 0;
+  })
+
+  let start = 0;
+  let next = 1;
+
+  while (next < args.length) {
+    if (args[start] === args[next]) {
+      return true;
+    }
+    start++;
+    next++;
+  }
+  return false;
+}
+
+console.log(areThereDuplicatesInArgs(3, 4, 5, 5, 6));
+console.log(areThereDuplicatesInArgs('a', 'b', 'c', 'a'));
