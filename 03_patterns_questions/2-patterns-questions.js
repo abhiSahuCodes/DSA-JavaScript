@@ -36,8 +36,8 @@ console.log(averagePairNums([1, 2, 3, 5, 8, 10, 11], 5));
 // Multiple Pointers - isSubsequence
 
 function isSubsequence(str1, str2) {
-  var i = 0;
-  var j = 0;
+  let i = 0;
+  let j = 0;
   if (!str1) return true;
   while (j < str2.length) {
     if (str2[j] === str1[i]) i++;
@@ -50,3 +50,28 @@ function isSubsequence(str1, str2) {
 const str1 = "abc";
 const str2 = "cdabc gbh";
 console.log(isSubsequence(str1, str2));
+
+// Max subarray sum
+
+function maxSubarraySum(arr, num) {
+  let maximumSum = 0;
+  let temporarySum = 0;
+  if (num > arr.length) {
+    return null;
+  }
+  for (let i = 0; i < num; i++) {
+    maximumSum += arr[i];
+  }
+  temporarySum = maximumSum;
+  for (let i = num; i < arr.length; i++) {
+    temporarySum = temporarySum - arr[i - num] + arr[i];
+    maximumSum = Math.max(maximumSum, temporarySum);
+  }
+  return maximumSum;
+}
+
+const arr = [100, 200, 300, 400, 500, 100, 300, 400]
+const num = 3;
+
+console.log(maxSubarraySum(arr, num))
+
