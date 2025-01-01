@@ -107,7 +107,7 @@ findPairWithDifference([1, 2, 3, 4], 6); // undefined
 function findPairWithDifference(array, targetDiff) {
   for (let i = 0; i < array.length; i++) {
     for (let j = i + 1; j < array.length; j++) {
-      if (array[j] - array[i] === targetDiff) { // No Math.abs to ensure the difference is directional
+      if (Math.abs(array[j] - array[i]) === targetDiff) { // No Math.abs to ensure the difference is directional
         return [array[i], array[j]];
       }
     }
@@ -119,6 +119,19 @@ function findPairWithDifference(array, targetDiff) {
 console.log(findPairWithDifference([1, 3, 5, 9, 12], 4)); // [1, 5]
 console.log(findPairWithDifference([2, 4, 8, 10, 15], 7)); // [8, 15]
 console.log(findPairWithDifference([1, 2, 3, 4], 6)); // undefined
+
+
+/*
+^ Explanation:
+
+The function uses two nested loops:
+The outer loop iterates through the elements of the array (i index).
+The inner loop compares the element at i with the rest of the elements (j index).
+It calculates the absolute difference between array[i] and array[j] using Math.abs.
+If the difference equals targetDiff, the function returns the pair [array[i], array[j]].
+If no pair is found, the function returns undefined.
+
+*/
 
 // ~ Optimal solution
 
@@ -150,3 +163,24 @@ function findPairWithDifference(array, targetDiff) {
 console.log(findPairWithDifference([1, 3, 5, 9, 12], 4)); // [1, 5]
 console.log(findPairWithDifference([2, 8, 6, 10, 15], 7)); // [8, 15]
 console.log(findPairWithDifference([1, 2, 3, 4], 6)); // undefined
+
+/*
+^ Explanation:
+
+1. Pointers Setup:
+      Start with two pointers, left and right.
+      left points to the first element, and right points to the next one.
+
+2. Logic:
+      Calculate the difference: difference = array[right] - array[left].
+      If the difference matches the targetDiff, return the pair [array[left], array[right]].
+      If the difference is smaller than the target, move right to increase the difference.
+      If the difference is larger than the target, move left to decrease the difference.
+
+Pointer Adjustment:
+      Ensure left never overtakes right.
+      Increment right if left === right after adjustments.
+      Time Complexity: O(n), as both pointers traverse the array at most once.
+
+*/
+
