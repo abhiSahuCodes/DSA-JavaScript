@@ -85,3 +85,35 @@ function sortedArrayTarget(arr, target) {
 const arr = [-4, -1, 0, 3, 5, 9, 12];
 const target = 5;
 console.log(sortedArrayTarget(arr, target)); 
+
+
+// & ---------------- Question 1 ---------------- 
+
+// Find the first pair of numbers with a specific difference
+
+/*
+Write a function that takes a sorted array of integers and a target difference. 
+The function should return the first pair of numbers in the array whose difference equals the target difference. If no such pair exists, return undefined.
+
+
+findPairWithDifference([1, 3, 5, 9, 12], 4); // [1, 5]
+findPairWithDifference([2, 3, 6, 10, 15], 7); // [3, 10]
+findPairWithDifference([1, 2, 3, 4], 6); // undefined
+
+*/
+
+function findPairWithDifference(array, targetDiff) {
+  for (let i = 0; i < array.length; i++) {
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[j] - array[i] === targetDiff) { // No Math.abs to ensure the difference is directional
+        return [array[i], array[j]];
+      }
+    }
+  }
+  return undefined;
+}
+
+// Test cases
+console.log(findPairWithDifference([1, 3, 5, 9, 12], 4)); // [1, 5]
+console.log(findPairWithDifference([2, 4, 8, 10, 15], 7)); // [8, 15]
+console.log(findPairWithDifference([1, 2, 3, 4], 6)); // undefined
