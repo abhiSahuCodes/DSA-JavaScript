@@ -102,6 +102,8 @@ findPairWithDifference([1, 2, 3, 4], 6); // undefined
 
 */
 
+// ~ Brute force solution
+
 function findPairWithDifference(array, targetDiff) {
   for (let i = 0; i < array.length; i++) {
     for (let j = i + 1; j < array.length; j++) {
@@ -116,4 +118,35 @@ function findPairWithDifference(array, targetDiff) {
 // Test cases
 console.log(findPairWithDifference([1, 3, 5, 9, 12], 4)); // [1, 5]
 console.log(findPairWithDifference([2, 4, 8, 10, 15], 7)); // [8, 15]
+console.log(findPairWithDifference([1, 2, 3, 4], 6)); // undefined
+
+// ~ Optimal solution
+
+function findPairWithDifference(array, targetDiff) {
+  let left = 0;
+  let right = 1;
+
+  while (right < array.length) {
+    let difference = array[right] - array[left];
+
+    if (difference === targetDiff) {
+      return [array[left], array[right]];
+    } else if (difference < targetDiff) {
+      right++; // Increase the right pointer to get a larger difference
+    } else {
+      left++; // Increase the left pointer to get a smaller difference
+    }
+
+    // Ensure pointers don't overlap
+    if (left === right) {
+      right++;
+    }
+  }
+
+  return undefined; // No pair found
+}
+
+// Test cases
+console.log(findPairWithDifference([1, 3, 5, 9, 12], 4)); // [1, 5]
+console.log(findPairWithDifference([2, 8, 6, 10, 15], 7)); // [8, 15]
 console.log(findPairWithDifference([1, 2, 3, 4], 6)); // undefined
