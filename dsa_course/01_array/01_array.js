@@ -100,3 +100,30 @@ for (let i = 1; i < arr2.length; i++) {
 }
 
 // console.log(prefix);
+
+// --Question--
+let arr3 = [2, 4, 6, 8, 10];
+
+let queries = [
+  [1, 3],
+  [0, 2],
+  [2, 4],
+];
+
+// Brute force (not recommended as it is slow)
+
+// Query [1, 3]
+
+function rangeSum(array, queries) {
+  let result = [];
+  for (let [L, R] of queries) {
+    let sum = 0;
+    for (let i = L; i <= R; i++) {
+      sum += array[i];
+    }
+    result.push(sum);
+  }
+  return {result};
+}
+
+console.log(rangeSum(arr3, queries));
