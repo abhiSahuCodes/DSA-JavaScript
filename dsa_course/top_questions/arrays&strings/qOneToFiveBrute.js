@@ -140,3 +140,43 @@ let arr2 = [1, 1, 2, 3, 3, 4, 5, 5];
 let arr3 = [9, 9, 9, 9];
 removeDuplicates(arr2);
 removeDuplicates(arr3);
+
+// ---------------------------- Find the Maximum / Minimum in an Array ------------------------------
+
+/* 
+Question: Given an array of numbers, find the largest (maximum) and smallest (minimum) number
+
+Example:
+Input:  [3, 1, 9, 2, 7]
+Output: Max = 9,  Min = 1
+
+Steps:
+Assume the first element is both the max and the min.
+Loop through the rest of the array.
+If the current element is greater than max, update max.
+If the current element is less than min, update min.
+Return both values.
+
+⏱ Time Complexity: O(n) — one pass through the array.
+🗂 Space Complexity: O(1) — only two variables used.
+*/
+
+function findMaxMin(arr) {
+  let max = arr[0];
+  let min = arr[0];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] > max) {
+      max = arr[i];
+    }
+    if (arr[i] < min) {
+      min = arr[i];
+    }
+  }
+  return { max, min };
+}
+
+let arr4 = [3, 1, 9, 2, 7];
+let arr5 = [5, 5, 5, 5, 5];
+console.log(findMaxMin(arr4));
+console.log(findMaxMin(arr5));
