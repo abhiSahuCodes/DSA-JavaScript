@@ -102,7 +102,41 @@ function checkPalindrome(str) {
   console.log(str === reversedStr);
 }
 
-checkPalindrome('racecar');
-checkPalindrome('racing');
+checkPalindrome("racecar");
+checkPalindrome("racing");
 
+// ---------------------------- Remove Duplicates from a Sorted Array ------------------------------
 
+/* 
+Question: Given a sorted array, remove the duplicate numbers and return only the unique elements (in-place, from the front).
+
+Example:
+Input:  [1, 1, 2, 3, 3, 4]
+Output: [1, 2, 3, 4]  → 4 unique elements
+
+Steps:
+Create an empty result array.
+Loop through the sorted array.
+For each element, check if it is already the last element added to the result.
+If it is NOT a duplicate, push it to the result.
+Return the result.
+
+⏱ Time Complexity: O(n) — single loop through the array.
+🗂 Space Complexity: O(n) — a new array is created to store unique elements.
+*/
+
+function removeDuplicates(arr) {
+  let sortedArr = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (sortedArr[sortedArr.length - 1] !== arr[i]) {
+      sortedArr.push(arr[i]);
+    }
+  }
+  console.log(sortedArr);
+}
+
+let arr2 = [1, 1, 2, 3, 3, 4, 5, 5];
+let arr3 = [9, 9, 9, 9];
+removeDuplicates(arr2);
+removeDuplicates(arr3);
