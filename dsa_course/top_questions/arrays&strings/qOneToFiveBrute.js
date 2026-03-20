@@ -29,3 +29,41 @@ function twoSum(array, target) {
 }
 
 console.log(twoSum(arr, target));
+
+// ---------------------------- Reverse a String ------------------------------
+
+/* 
+Question: Given a string or array, return it in reversed order.
+
+Example:
+Input:  "hello"         →  Output: "olleh"
+Input:  [1, 2, 3, 4, 5] →  Output: [5, 4, 3, 2, 1]
+
+Steps:
+Create an empty result (empty string or empty array).
+Loop from the last index down to 0.
+At each step, add the current element to the result.
+Return the result.
+*/
+
+function reverseString(str) {
+  let reversedString = "";
+  for (let i = str.length - 1; i >= 0; i--) {
+    reversedString += str[i];
+  }
+  console.log(reversedString);
+}
+
+function reverseArray(arr) {
+  let reversedArray = [];
+  for (let i = arr.length - 1; i >= 0; i--) {
+    reversedArray.push(arr[i]);
+  }
+  console.log(reversedArray);
+}
+
+let str = "fantastic";
+let arr1 = [2, 3, 5, 9, 10];
+
+reverseString(str);
+reverseArray(arr1);
