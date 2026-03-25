@@ -114,3 +114,38 @@ function mergeSortedArrays(arr1, arr2) {
 }
 
 mergeSortedArrays([1, 3, 5], [2, 4, 6]);
+
+//  ---------------------------- Find the Missing Number (1 to n) ------------------------------
+
+/* 
+Question: Given an array containing n - 1 numbers from 1 to n, find the one missing number.
+
+Example:
+Input:  [1, 2, 4, 5, 6],  n = 6
+Output: 3   → 3 is missing
+
+Steps:
+Loop from 1 to n (inclusive).
+For each number i, check if it exists in the array using another inner loop.
+If a number is not found in the array, that is the missing number.
+Return it.
+
+⏱ Time Complexity: O(n²) — for every number 1 to n, we scan the entire array.
+🗂 Space Complexity: O(1) — no extra space used.
+*/
+
+function findMissingNumber(arr, n) {
+  for (let i = 1; i <= n; i++) {
+    let found = false;
+    for (let j = 0; j < arr.length; j++) {
+      if (arr[j] === i) {
+        found = true;
+        break;
+      }
+    }
+    if (!found) return i;
+  }
+  return -1;
+}
+
+console.log(findMissingNumber([1, 2, 4, 5, 6], 6));
