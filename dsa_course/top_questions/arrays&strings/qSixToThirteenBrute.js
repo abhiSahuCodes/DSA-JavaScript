@@ -78,3 +78,39 @@ function moveZeros(arr) {
 }
 
 console.log(moveZeros([0, 1, 0, 3, 12]));
+
+// ---------------------------- Merge Two Sorted Arrays ------------------------------
+
+/* 
+Question: Given two sorted arrays, merge them into one single sorted array.
+
+Example:
+Input:  arr1 = [1, 3, 5],  arr2 = [2, 4, 6]
+Output: [1, 2, 3, 4, 5, 6]
+[1, 3, 5, 2, 4, 6]
+
+Steps:
+Combine both arrays into one big array using spread or concat.
+Sort the combined array using a comparator function.
+Return the sorted result.
+
+⏱ Time Complexity: O((n + m)²) — bubble sort on the merged array of size n+m.
+🗂 Space Complexity: O(n + m) — a new merged array is created.
+*/
+
+function mergeSortedArrays(arr1, arr2) {
+  let mergedArray = arr1.concat(arr2);
+
+  for (let i = 0; i < mergedArray.length; i++) {
+    for (let j = i + 1; j < mergedArray.length; j++) {
+      if (mergedArray[i] > mergedArray[j]) {
+        let last = mergedArray[i];
+        mergedArray[i] = mergedArray[j];
+        mergedArray[j] = last;
+      }
+    }
+  }
+  console.log(mergedArray);
+}
+
+mergeSortedArrays([1, 3, 5], [2, 4, 6]);
