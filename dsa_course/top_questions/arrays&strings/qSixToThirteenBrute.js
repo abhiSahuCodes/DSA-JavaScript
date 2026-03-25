@@ -27,7 +27,7 @@ function rotateArray(arr, k) {
   for (let i = 0; i < k; i++) {
     let lastElement = arr[n - 1];
     for (let j = n - 1; j > 0; j--) {
-      arr[j] = arr[j - 1]
+      arr[j] = arr[j - 1];
     }
     arr[0] = lastElement;
   }
@@ -39,5 +39,42 @@ let k = 3;
 
 console.log(rotateArray(arr6, k));
 
-// ---------------------------- Rotate an Array by K Steps ------------------------------
+// ---------------------------- Move All Zeroes to the End ------------------------------
 
+/* 
+Question: Given an array, move all 0s to the end of the array while keeping the order of 
+non-zero elements unchanged.
+
+Example:
+Input:  [0, 1, 0, 3, 12]
+Output: [1, 3, 12, 0, 0]
+
+Steps:
+Create two separate arrays: one for non-zero elements, one for zeros.
+Loop through the input array.
+If the current element is not 0, push it to the non-zero array.
+If the current element is 0, push it to the zeros array.
+Merge (concatenate) both arrays: non-zeros first, then zeros.
+
+⏱ Time Complexity: O(n) — one loop through the array.
+🗂 Space Complexity: O(n) — two extra arrays are created.
+*/
+
+function moveZeros(arr) {
+  let arrZeros = [];
+  let arrNonZeros = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    let num = arr[i];
+
+    if (num === 0) {
+      arrZeros.push(num);
+    } else {
+      arrNonZeros.push(num);
+    }
+  }
+  let movedZerosArray = arrNonZeros.concat(arrZeros);
+  return movedZerosArray;
+}
+
+console.log(moveZeros([0, 1, 0, 3, 12]));
