@@ -197,3 +197,51 @@ function lengthOfLongestSubstring(string) {
 }
 
 lengthOfLongestSubstring("pwwkwe");
+
+//  ---------------------------- Valid Anagram ------------------------------
+
+/* 
+Question: Two strings are anagrams if one string can be formed by 
+rearranging the letters of the other. Check if two given strings are anagrams.
+
+Example:
+Input:  s = "anagram",  t = "nagaram"  →  Output: true
+Input:  s = "rat",      t = "car"      →  Output: false
+
+Steps:
+If both strings have different lengths, immediately return false.
+Loop through the first string and count the frequency of each 
+character using an object (frequency map).
+Loop through the second string and decrease the count for each character.
+If a character is not found or count goes below 0, return false.
+If all counts remain balanced, return true.
+
+⏱ Time Complexity: O(n) — two separate loops of length n.
+🗂 Space Complexity: O(1) — at most 26 letters stored in the frequency map.
+*/
+
+function isAnagram(str1, str2) {
+  if (str1.length !== str2.length) return false;
+
+  let freqCounter = {};
+
+  for (let char of str1) {
+    if (freqCounter[char]) {
+      freqCounter[char] += 1;
+    } else {
+      freqCounter[char] = 1;
+    }
+  }
+
+  for (let char of str2) {
+    if (!freqCounter[char]) {
+      return false;
+    } else {
+      freqCounter[char] -= 1;
+    }
+  }
+  return true;
+}
+
+console.log(isAnagram("anagram", "nagaram"));
+console.log(isAnagram("rat", "car"));
