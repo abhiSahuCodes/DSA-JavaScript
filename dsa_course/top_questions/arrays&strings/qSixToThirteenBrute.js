@@ -149,3 +149,51 @@ function findMissingNumber(arr, n) {
 }
 
 console.log(findMissingNumber([1, 2, 4, 5, 6], 6));
+
+//  ---------------------------- Longest Substring Without Repeating Characters ------------------------------
+
+/* 
+Question: Given a string, find the length of the longest part (substring) that 
+has no repeated characters.
+
+Example:
+Input:  "abcabcbb"
+Output: 3   → "abc" is the longest without repeats
+
+Input:  "pwwkew"
+Output: 3   → "wke"
+
+Steps:
+Use two loops: outer loop picks the start of the substring.
+Inner loop extends the substring from that start.
+Use a Set to track characters seen so far.
+If a character is already in the Set, stop the inner loop.
+Track and update the maximum length found.
+If using object:
+Use two loops: outer loop picks the start of the substring.
+Inner loop extends the substring character by character from that start.
+Use an object to track characters seen so far.
+If a character is already in the object, stop the inner loop.
+Track and update the maximum length using j - i + 1 
+where i is the start and j is the current position.
+
+⏱ Time Complexity: O(n²) — two nested loops over the string.
+🗂 Space Complexity: O(min(n, 26)) — the object holds at most the unique characters.
+*/
+
+function lengthOfLongestSubstring(string) {
+  let maxLength = 0;
+  for (let i = 0; i < string.length; i++) {
+    let seen = {};
+    for (let j = i; j < string.length; j++) {
+      if (seen[string[j]]) {
+        break;
+      } else seen[string[j]] = true;
+      console.log(seen);
+      maxLength = Math.max(maxLength, j - i + 1);
+    }
+  }
+  console.log(maxLength);
+}
+
+lengthOfLongestSubstring("pwwkwe");
