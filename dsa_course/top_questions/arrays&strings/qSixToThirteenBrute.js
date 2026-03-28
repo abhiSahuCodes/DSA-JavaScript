@@ -263,8 +263,11 @@ every word from the input, and additional strings are created during the sorting
 */
 
 function groupAnagram(words) {
+  // Make an empty group where the result will be stored (a group of arrays)
   let groups = [];
 
+  // Iterate through the words array, take current word, sort alphabets, 
+  // place a flag of placed as false
   for (let i = 0; i < words.length; i++) {
     let currentWord = words[i];
 
@@ -272,16 +275,20 @@ function groupAnagram(words) {
 
     let placed = false;
 
+    // Iterate through the group array, take the first word of the first group, sort alphabets
     for (let j = 0; j < groups.length; j++) {
       let groupRepresentative = groups[j][0];
       let representativeSorted = groupRepresentative.split("").sort().join("");
 
+      // Compare the current sorted word (from words) with the recent sorted word (from group)
+      // If they match push to the same group as j specifies, make the placed true, and break
       if (sortedCurrent === representativeSorted) {
         groups[j].push(currentWord);
         placed = true;
         break;
       }
     }
+    // If no match found after comparing through the group then push to a new group in groups
     if (!placed) {
       groups.push([currentWord]);
     }
