@@ -245,3 +245,48 @@ function isAnagram(str1, str2) {
 
 console.log(isAnagram("anagram", "nagaram"));
 console.log(isAnagram("rat", "car"));
+
+//  ---------------------------- Group Anagrams Together ------------------------------
+
+/* 
+Question: Given an array of strings, group the strings that are anagrams of each other together.
+
+Example:
+Input:  ["eat", "tea", "tan", "ate", "nat", "bat"]
+Output: [["eat","tea","ate"], ["tan","nat"], ["bat"]]
+
+⏱ Time Complexity: O(n² * k log k) — where n is the number of words 
+and k is the maximum length of a word; the nested loops compare each 
+word against existing groups, sorting the strings repeatedly inside the inner loop.
+🗂 Space Complexity: O(n * k) — the groups array stores every character of 
+every word from the input, and additional strings are created during the sorting process.
+*/
+
+function groupAnagram(words) {
+  let groups = [];
+
+  for (let i = 0; i < words.length; i++) {
+    let currentWord = words[i];
+
+    let sortedCurrent = currentWord.split("").sort().join("");
+
+    let placed = false;
+
+    for (let j = 0; j < groups.length; j++) {
+      let groupRepresentative = groups[j][0];
+      let representativeSorted = groupRepresentative.split("").sort().join("");
+
+      if (sortedCurrent === representativeSorted) {
+        groups[j].push(currentWord);
+        placed = true;
+        break;
+      }
+    }
+    if (!placed) {
+      groups.push([currentWord]);
+    }
+  }
+  console.log(groups);
+}
+
+groupAnagram(["eat", "tea", "tan", "ate", "nat", "bat"]);
