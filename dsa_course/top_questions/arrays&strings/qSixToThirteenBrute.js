@@ -290,3 +290,46 @@ function groupAnagram(words) {
 }
 
 groupAnagram(["eat", "tea", "tan", "ate", "nat", "bat"]);
+
+//  ---------------------------- Product of Array Except Self ------------------------------
+
+/* 
+Question: Given an array, return a new array where each element at index i is the 
+product of all numbers in the original array except the number at index i. You cannot use division.
+
+Example:
+Input:  [1, 2, 3, 4]
+Output: [24, 12, 8, 6]
+
+  Index 0 → 2 × 3 × 4 = 24
+  Index 1 → 1 × 3 × 4 = 12
+  Index 2 → 1 × 2 × 4 = 8
+  Index 3 → 1 × 2 × 3 = 6
+
+Steps:
+Create a result array of the same size filled with 1s.
+Use two nested loops: the outer loop picks index i.
+The inner loop multiplies all elements except arr[i].
+Store that product in result[i].
+Return the result array.
+
+⏱ Time Complexity: O(n²) — two nested loops, each running n times.
+🗂 Space Complexity: O(n) — the result array of size n.
+*/
+
+function productExceptSelf(arr) {
+  let result = new Array(arr.length).fill(1);
+
+  for (let i = 0; i < arr.length; i++) {
+    let product = 1;
+    for (let j = 0; j < arr.length; j++) {
+      if (i !== j) {
+        product *= arr[j];
+      }
+    }
+    result[i] = product;
+  }
+  return result;
+}
+
+console.log(productExceptSelf([1, 2, 3, 4]));
