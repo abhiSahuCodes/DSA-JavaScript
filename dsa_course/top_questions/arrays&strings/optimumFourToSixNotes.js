@@ -197,3 +197,91 @@ You never needed to remember everyone — just the two record holders at any mom
 
 
 // ========================================================================================================================
+
+
+
+/* 
+################################## Rotate an Array by K steps ##################################
+Question 6: Given an array, rotate (shift) it to the right by K steps. Every element moves K positions to the right, 
+            and elements at the end wrap around to the front.
+
+textInput:  [1, 2, 3, 4, 5],  k = 2
+Output: [4, 5, 1, 2, 3]
+         ↑ last 2 elements come to the front
+*/
+
+/* =========================================
+PROBLEM: Rotate an Array by K Steps
+CATEGORY: Array / Two Pointers (Reversal Trick)
+SIGNAL: "rotate", "shift right by K", "elements wrap around to the front"
+=========================================
+
+WHAT AM I LOOKING FOR?
+- Return a new arrangement of the array where every element has moved K positions
+  to the right, and the last K elements now sit at the front.
+
+WHAT WOULD I DO MANUALLY?
+- Take the last K elements from the end of the array.
+- Place them at the front.
+- Keep the rest of the elements in their original order after them.
+- Example: [1,2,3,4,5], k=2 → take [4,5] → put in front → [4,5,1,2,3]
+
+WHAT CONTAINER DOES THAT FOR ME?
+- A plain Array — we're just slicing and joining two halves.
+- No key/value needed. We use array.slice() to split at the cut point.
+- Cut point = array.length - k
+
+STEPS (Plain English):
+1. Handle edge case: if k is larger than the array, use k = k % array.length
+   (rotating by the full length is the same as not rotating at all).
+2. Find the cut point: cutIndex = array.length - k
+   (this is where the "back half" starts).
+3. Slice the back half: array.slice(cutIndex) → this gives the last K elements.
+4. Slice the front half: array.slice(0, cutIndex) → this gives the remaining elements.
+5. Concatenate: [...backHalf, ...frontHalf] and return.
+
+KEY SYNTAX USED:
+- array.slice(start, end)       → extracts portion WITHOUT modifying original
+- array.slice(cutIndex)         → from cutIndex to the END of the array
+- array.slice(0, cutIndex)      → from index 0 UP TO (not including) cutIndex
+- k % array.length              → prevents over-rotation if k > array.length
+- [...arr1, ...arr2]            → spreads two arrays into one (or use arr1.concat(arr2))
+
+MISTAKE I MADE (or: MISTAKE TO WATCH):
+- Forgetting k % array.length: if k = 7 and array length = 5,
+  you'd try to slice beyond the array — always normalize k first.
+- Confusing the cut point: it's array.length - k, NOT k itself.
+  Think of it as "where does the back half start?" not "where does it end?"
+- Using splice() instead of slice() — splice MUTATES the array, slice does NOT.
+
+*/
+
+// ---- SOLUTION ----
+
+function rotateArray(arr, k) {
+  k = k % arr.length;              // normalize k
+  const cutIndex = arr.length - k; // find the split point
+  const backHalf = arr.slice(cutIndex);     // last K elements
+  const frontHalf = arr.slice(0, cutIndex); // remaining elements
+  return [...backHalf, ...frontHalf];
+}
+
+/*
+EXAMPLE:
+Input:  [1, 2, 3, 4, 5], k = 2
+Output: [4, 5, 1, 2, 3]
+
+BRUTE FORCE:  O(n) time  O(n) space  ← slice + concat makes a new array
+OPTIMIZED:    O(n) time  O(1) space  ← in-place reversal trick
+              (reverse whole array, reverse first k, reverse rest)
+              
+Quick Mental Model:
+The key insight to remember: the last K elements become the new front. 
+So the "cut" always happens at array.length - k — that's the dividing line between 
+what goes to the front and what stays behind.
+
+The % array.length normalization is the most common mistake point to watch — 
+if k = 5 on a 5-element array, rotating by the full length changes nothing, 
+so 5 % 5 = 0 correctly handles it.
+*/
+
