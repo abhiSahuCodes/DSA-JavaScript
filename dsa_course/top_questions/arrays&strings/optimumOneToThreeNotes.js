@@ -195,3 +195,106 @@ Left starts at index 0, right starts at arr.length - 1, and they walk toward eac
 other until they meet. The only extra rule for strings is the split → work → join 
 sandwich, because JS strings cannot be changed in place.
 */
+
+// ========================================================================================================================
+
+
+
+/* 
+################################## Check Pallindrome ##################################
+Question 3: A string is a palindrome if it reads the same forwards and backwards. Check if a given string is a palindrome.
+
+textInput: "racecar"  →  Output: true   (racecar reversed = racecar)
+Input: "hello"    →  Output: false  (hello reversed = olleh)
+*/
+
+/* =========================================
+PROBLEM: Check Palindrome
+CATEGORY: Two Pointers / String
+SIGNAL: "palindrome", "reads the same forwards and backwards", "symmetric"
+=========================================
+
+WHAT AM I LOOKING FOR?
+- Return true if the string is the same when reversed, false if it is not.
+
+WHAT WOULD I DO MANUALLY?
+- Point one finger at the first letter, another at the last letter.
+- Compare them — are they the same?
+- If yes, move both fingers inward and compare again.
+- If at any point they don't match → it's NOT a palindrome.
+- If fingers meet in the middle without a mismatch → it IS a palindrome.
+- Example: "racecar"
+            r == r ✅ → move inward
+              a == a ✅ → move inward
+                c == c ✅ → middle reached → true
+
+WHAT CONTAINER DOES THAT FOR ME?
+- No container needed — just two pointer variables (left and right) as index markers.
+- We compare characters directly using bracket notation: str[left] vs str[right].
+
+STEPS (Plain English):
+1. Set left pointer at index 0, right pointer at str.length - 1.
+2. While left < right:
+   a. Compare str[left] and str[right].
+   b. If they are NOT equal → return false immediately.
+   c. If they ARE equal → move left forward (left++), move right backward (right--).
+3. If the loop finishes without returning false → return true.
+
+KEY SYNTAX USED:
+- str[left]                  → access character at index left (same as str.charAt(left))
+- str.toLowerCase()          → normalize case before comparing ("A" vs "a" = same)
+- str.replace(/[^a-z0-9]/g, "") → remove spaces/punctuation if needed (real interviews!)
+- while (left < right)       → stop when pointers meet or cross
+- return false               → exit early the moment a mismatch is found
+- return true                → placed OUTSIDE the loop, reached only if no mismatch
+
+MISTAKE TO WATCH:
+- Placing return true INSIDE the loop ❌ — it would return true after just the
+  first matching pair, before checking the rest of the string.
+  return true must be OUTSIDE and AFTER the while loop.
+- Forgetting case sensitivity — "Racecar" would fail without .toLowerCase() first.
+- Using str.length instead of str.length - 1 for the right pointer start —
+  str.length is out of bounds, always subtract 1.
+- Shortcut trap: str.split("").reverse().join("") === str works but is O(n) space.
+  Two Pointers is O(1) space and shows you actually understand the mechanism.
+
+*/
+
+// ---- SOLUTION ----
+
+// Two Pointers (Optimized — O(1) space)
+function isPalindrome(str) {
+  str = str.toLowerCase();          // normalize case
+  let left = 0;
+  let right = str.length - 1;
+  while (left < right) {
+    if (str[left] !== str[right]) {
+      return false;                 // mismatch found → not a palindrome
+    }
+    left++;
+    right--;
+  }
+  return true;                      // ← OUTSIDE the loop
+}
+
+// Shortcut (readable, but O(n) space — good to know, not the best answer)
+function isPalindromeShortcut(str) {
+  const cleaned = str.toLowerCase();
+  return cleaned === cleaned.split("").reverse().join("");
+}
+
+/*
+EXAMPLE:
+Input:  "racecar"  →  Output: true
+Input:  "hello"    →  Output: false
+
+BRUTE FORCE:  O(n) time  O(n) space  ← reverse the string, compare to original
+OPTIMIZED:    O(n) time  O(1) space  ← two pointers, no extra string created
+
+The One Mental Anchor
+Palindrome is just Reverse a String in disguise — same two pointers, same inward 
+movement. The only difference is: instead of swapping, you compare. The moment one
+pair doesn't match, you're done — return false immediately. If you survive the 
+whole loop, return true — but only outside the loop, never inside it.
+
+*/
